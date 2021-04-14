@@ -10,7 +10,6 @@ import javax.annotation.PostConstruct;
 @Service
 public class Parser {
 
-
     public Parser() {
     }
 
