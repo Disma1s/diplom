@@ -4,8 +4,11 @@ package ru.dismals.diplom.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Vadim Shilov
@@ -14,17 +17,24 @@ import javax.persistence.*;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     private String nameProduct;
-    private int price;
 
-    @ManyToOne(optional = false)
-    private Year yearProd;
+    @OneToMany(orphanRemoval = true, mappedBy = "product", cascade = CascadeType.ALL)
+    private List<YearAndPrice> yearList = new ArrayList<>();
 
-    public Product() {
+    public void addYearAndPrice(YearAndPrice product) {
+        yearList.add(product);
+        product.setProduct(this);
+    }
+
+    public void removeYearAndPrice(YearAndPrice product) {
+        yearList.remove(product);
+        product.setProduct(null);
     }
 }

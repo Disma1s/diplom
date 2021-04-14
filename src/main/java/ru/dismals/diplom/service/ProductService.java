@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service;
  * @author Yurii Tyshchuk
  */
 @Service
-public class YearService {
+public class ProductService {
 }
