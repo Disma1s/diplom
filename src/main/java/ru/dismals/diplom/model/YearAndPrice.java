@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * @author Yurii Tyshchuk
@@ -17,7 +16,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Year {
+public class YearAndPrice {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -25,17 +24,9 @@ public class Year {
     private String id;
 
     private int year;
+    private int price;
 
-    @OneToMany(orphanRemoval = true, mappedBy = "yearProd", cascade = CascadeType.ALL)
-    private List<Product> productList;
+    @ManyToOne(optional = false)
+    private Product product;
 
-    public void addProduct(Product product) {
-        productList.add(product);
-        product.setYearProd(this);
-    }
-
-    public void removeProduct(Product product) {
-        productList.remove(product);
-        product.setYearProd(null);
-    }
 }
