@@ -10,12 +10,11 @@ import javax.annotation.PostConstruct;
 @Service
 public class Parser {
 
-
     public Parser() {
     }
 
     @PostConstruct
     private void init() {
-
+        System.out.println(123);
     }
 }
