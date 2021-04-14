@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.UUID;
 
+/**
+ *
+ * @author Vadim Shilov
+ */
 @Entity
 @Data
 public class Product {

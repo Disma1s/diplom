@@ -15,7 +15,7 @@ public class Year {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(unique = true)
-    private Long id;
+    private String id;
 
     private int year;
 
