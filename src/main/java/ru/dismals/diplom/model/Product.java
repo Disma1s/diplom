@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,14 +26,14 @@ public class Product {
     private String nameProduct;
 
     @OneToMany(orphanRemoval = true, mappedBy = "product", cascade = CascadeType.ALL)
-    private List<YearAndPrice> yearList;
+    private List<YearAndPrice> yearList = new ArrayList<>();
 
-    public void addProduct(YearAndPrice product) {
+    public void addYearAndPrice(YearAndPrice product) {
         yearList.add(product);
         product.setProduct(this);
     }
 
-    public void removeProduct(YearAndPrice product) {
+    public void removeYearAndPrice(YearAndPrice product) {
         yearList.remove(product);
         product.setProduct(null);
     }

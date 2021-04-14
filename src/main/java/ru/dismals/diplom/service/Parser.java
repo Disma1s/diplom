@@ -57,18 +57,16 @@ public class Parser {
             JSONArray priceList = Number.getJSONArray("values");
             JSONArray yearsArray = Number.getJSONArray("years");
 
-            List<YearAndPrice> yearAndPrices = new ArrayList<>();
+            Product product = new Product();
+            product.setNameProduct(name);
 
             for (int i = 0; i < yearsArray.length(); i++) {
-                yearAndPrices.add(YearAndPrice.builder()
-                        .price(priceList.getInt(i))
+                product.addYearAndPrice(YearAndPrice.builder()
                         .year(yearsArray.getInt(i))
+                        .price(priceList.getInt(i))
                         .build());
             }
-            productList.add(Product.builder()
-                    .nameProduct(name)
-                    .yearList(yearAndPrices)
-                    .build());
+            productList.add(product);
         }
         productRepo.saveAll(productList);
     }

@@ -8,5 +8,5 @@ import java.util.UUID;
 /**
  * @author Yurii Tyshchuk
  */
-public interface YearRepo extends JpaRepository<YearAndPrice, UUID> {
+public interface YearRepo extends JpaRepository<YearAndPrice, Long> {
 }
