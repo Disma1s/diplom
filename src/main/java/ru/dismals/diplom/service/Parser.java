@@ -36,38 +36,42 @@ public class Parser {
         this.yearRepo = yearRepo1;
     }
 
-    @PostConstruct
-    private void init() throws IOException {
-        URL url = new URL(BASE_URL);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    public void init(){
+        if(!productRepo.findByNameProduct("Sugar").isPresent())
+        try {
+            URL url = new URL(BASE_URL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-        InputStream inputStream = connection.getInputStream();
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
+            InputStream inputStream = connection.getInputStream();
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 
-        JSONObject jsonObject = new JSONObject(IOUtils.toString(bufferedInputStream, StandardCharsets.UTF_8.toString()));
-        JSONObject variables = jsonObject.getJSONObject("variables");
+            JSONObject jsonObject = new JSONObject(IOUtils.toString(bufferedInputStream, StandardCharsets.UTF_8.toString()));
+            JSONObject variables = jsonObject.getJSONObject("variables");
 
-        List<Product> productList = new ArrayList<>();
+            List<Product> productList = new ArrayList<>();
 
-        Iterator<String> keys = variables.keys();
-        while (keys.hasNext()) {
-            JSONObject Number = variables.getJSONObject(keys.next());
+            Iterator<String> keys = variables.keys();
+            while (keys.hasNext()) {
+                JSONObject Number = variables.getJSONObject(keys.next());
 
-            String name = Number.getString("name");
-            JSONArray priceList = Number.getJSONArray("values");
-            JSONArray yearsArray = Number.getJSONArray("years");
+                String name = Number.getString("name");
+                JSONArray priceList = Number.getJSONArray("values");
+                JSONArray yearsArray = Number.getJSONArray("years");
 
-            Product product = new Product();
-            product.setNameProduct(name);
+                Product product = new Product();
+                product.setNameProduct(name);
 
-            for (int i = 0; i < yearsArray.length(); i++) {
-                product.addYearAndPrice(YearAndPrice.builder()
-                        .year(yearsArray.getInt(i))
-                        .price(priceList.getInt(i))
-                        .build());
+                for (int i = 0; i < yearsArray.length(); i++) {
+                    product.addYearAndPrice(YearAndPrice.builder()
+                            .year(yearsArray.getInt(i))
+                            .price(priceList.getInt(i))
+                            .build());
+                }
+                productList.add(product);
             }
-            productList.add(product);
+            productRepo.saveAll(productList);
+        } catch (IOException e) {
+            e.getStackTrace();
         }
-        productRepo.saveAll(productList);
     }
 }

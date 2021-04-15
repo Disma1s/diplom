@@ -1,5 +1,7 @@
 package ru.dismals.diplom.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.dismals.diplom.model.Product;
@@ -10,7 +12,7 @@ import java.util.List;
 /**
  * @author Yurii Tyshchuk
  */
-@RestController
+@Controller
 public class MainController {
     private final ProductRepo product;
     public MainController(ProductRepo product) {
@@ -18,7 +20,7 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public List<Product> getAllYears() {
-        return product.findAll();
+    public String getAllYears(Model model) {
+        return "index";
     }
 }

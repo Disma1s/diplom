@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <link rel="stylesheet" href="css/Main.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#container').highcharts({
+                data:{
+                    table: 'datatable'
+                },
+                chart:{
+                    type: 'line'
+                },
+                title: {
+                    text: 'Ну привет'
+                },
+                yAxis: {
+                    allowDecimals: false,
+                    title: {
+                        text: 'Колечество заболевших'
+                    }
+                },
+                tooltip: {
+                    formatter: this.percentage
+                },
+                plotOptions: {
+                    series: {
+                        label: {
+                            connectorAllowed: false
+                        },
+                    }
+                },
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="container"></div>
+<table id="datatable">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Подтвержденных</th>
+        <th>Умерло</th>
+        <th>Восстановилось</th>
+        <th>Сейчас болеют</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#List}}
+        <tr>
+            <th>{{date}}</th>
+            <td>{{confirmed}}</td>
+            <td>{{deaths}}</td>
+            <td>{{recovered}}</td>
+            <td>{{active}}</td>
+        </tr>
+    {{/List}}
+    </tbody>
+</table>
+</body>
+</html>

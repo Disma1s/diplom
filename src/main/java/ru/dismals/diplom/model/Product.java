@@ -25,7 +25,7 @@ public class Product {
 
     private String nameProduct;
 
-    @OneToMany(orphanRemoval = true, mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(orphanRemoval = true, mappedBy = "product", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<YearAndPrice> yearList = new ArrayList<>();
 
     public void addYearAndPrice(YearAndPrice product) {
