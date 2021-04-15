@@ -1,5 +1,6 @@
 package ru.dismals.diplom.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,7 +26,7 @@ public class YearAndPrice {
 
     private int year;
     private int price;
-
+    @JsonIgnore
     @ManyToOne(optional = false)
     private Product product;
 

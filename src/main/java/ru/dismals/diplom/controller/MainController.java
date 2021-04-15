@@ -2,19 +2,23 @@ package ru.dismals.diplom.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.dismals.diplom.model.YearAndPrice;
+import ru.dismals.diplom.model.Product;
+import ru.dismals.diplom.repository.ProductRepo;
+
+import java.util.List;
 
 /**
  * @author Yurii Tyshchuk
  */
 @RestController
 public class MainController {
-
-    public MainController() {
+    private final ProductRepo product;
+    public MainController(ProductRepo product) {
+        this.product = product;
     }
 
     @GetMapping("/")
-    public YearAndPrice getAllYears() {
-        return new YearAndPrice();
+    public List<Product> getAllYears() {
+        return product.findAll();
     }
 }
