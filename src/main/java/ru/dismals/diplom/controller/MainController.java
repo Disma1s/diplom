@@ -3,11 +3,8 @@ package ru.dismals.diplom.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import ru.dismals.diplom.model.Product;
 import ru.dismals.diplom.repository.ProductRepo;
-
-import java.util.List;
+import ru.dismals.diplom.service.Forecasting;
 
 /**
  * @author Yurii Tyshchuk
@@ -15,12 +12,17 @@ import java.util.List;
 @Controller
 public class MainController {
     private final ProductRepo product;
-    public MainController(ProductRepo product) {
+    private final Forecasting forecasting;
+
+    public MainController(ProductRepo product, Forecasting forecasting) {
         this.product = product;
+        this.forecasting = forecasting;
     }
 
     @GetMapping("/")
     public String getAllYears(Model model) {
+
+
         return "index";
     }
 }
