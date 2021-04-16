@@ -9,9 +9,9 @@ import ru.dismals.diplom.model.YearAndPrice;
 import ru.dismals.diplom.repository.ProductRepo;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 /**
  *
@@ -21,7 +21,7 @@ public class Forecasting {
 
     private final ProductRepo productRepo;
     private final Parser parser;
-    public double[] forecastData;
+    public Map<String, List<Integer>> forecastingResult = new HashMap<>();
 
     public Forecasting(ProductRepo productRepo, Parser parser) {
         this.productRepo = productRepo;
@@ -42,25 +42,24 @@ public class Forecasting {
 
         for (Product product : productRepo.findAll()) {
             List<Double> integerList = new ArrayList<>();
-
             for (YearAndPrice yearAndPrice : product
                     .getYearList()
                     .stream()
                     .limit(163)
                     .collect(Collectors.toList())) {
-
                 integerList.add((double) yearAndPrice.getPrice());
             }
 
             ForecastResult forecastResult = Arima
                     .forecast_arima(integerList.stream().mapToDouble(value -> value).toArray(), forecastSize, new ArimaParams(p, d, q, P, D, Q, m));
 
-            forecastData = forecastResult.getForecast();
-//            double[] uppers = forecastResult.getForecastUpperConf();
-//            double[] lowers = forecastResult.getForecastLowerConf();
-//            double rmse = forecastResult.getRMSE();
-//            double maxNormalizedVariance = forecastResult.getMaxNormalizedVariance();
-            print(forecastData, product.getNameProduct());
+            int[] ints = DoubleStream.of(forecastResult.getForecast()).mapToInt(value -> (int) value).toArray();
+
+            forecastingResult.put(
+                    product.getNameProduct(),
+                    Arrays.stream(ints).boxed().collect(Collectors.toList())
+            );
+            print(forecastResult.getForecast(),product.getNameProduct());
         }
     }
 
