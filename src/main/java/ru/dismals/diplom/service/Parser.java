@@ -60,17 +60,17 @@ public class Parser {
                     Product product = new Product();
                     product.setNameProduct(name);
 
-                for (int i = 0; i < yearsArray.length(); i++) {
-                    product.addYearAndPrice(YearAndPrice.builder()
-                            .year(yearsArray.getInt(i))
-                            .price(priceList.getInt(i))
-                            .build());
+                    for (int i = 0; i < yearsArray.length(); i++) {
+                        product.addYearAndPrice(YearAndPrice.builder()
+                                .year(yearsArray.getInt(i))
+                                .price(priceList.getInt(i))
+                                .build());
+                    }
+                    productList.add(product);
                 }
-                productList.add(product);
+                productRepo.saveAll(productList);
+            } catch (IOException e) {
+                e.getStackTrace();
             }
-            productRepo.saveAll(productList);
-        } catch (IOException e) {
-            e.getStackTrace();
-        }
     }
 }
