@@ -1,11 +1,15 @@
 package ru.dismals.diplom.controller;
 
+import com.workday.insights.timeseries.arima.struct.ArimaParams;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.dismals.diplom.model.Product;
-import ru.dismals.diplom.model.YearAndPrice;
+import ru.dismals.diplom.model.newEntity.Price;
+import ru.dismals.diplom.model.newEntity.Shop;
+import ru.dismals.diplom.model.old.Product;
+import ru.dismals.diplom.model.old.YearAndPrice;
 import ru.dismals.diplom.repository.ProductRepo;
+import ru.dismals.diplom.service.ArimaService;
 import ru.dismals.diplom.service.Forecasting;
 
 import java.util.List;
@@ -18,10 +22,12 @@ import java.util.stream.Collectors;
 public class MainController {
     private final ProductRepo product;
     private final Forecasting forecasting;
+    private final ArimaService arimaService;
 
-    public MainController(ProductRepo product, Forecasting forecasting) {
+    public MainController(ProductRepo product, Forecasting forecasting, ArimaService arimaService) {
         this.product = product;
         this.forecasting = forecasting;
+        this.arimaService = arimaService;
     }
 
     @GetMapping("/")
@@ -47,5 +53,27 @@ public class MainController {
 
         model.addAttribute("Years", years);
         return "index";
+    }
+
+    @GetMapping("/NewValue")
+    public String getNewValue(Model model) {
+        final List<Shop> shopList = arimaService.ArimaFromNewValue(
+                new ArimaParams(2, 0, 1, 0, 0, 0, 0),
+                2,
+                0
+        );
+
+        shopList.forEach(shop -> {
+            shop.getProductList().forEach(newProduct -> {
+                model.addAttribute(
+                        shop.getName() + newProduct.getName(),
+                        newProduct.getPrices().stream()
+                                .map(Price::getPrice)
+                                .collect(Collectors.toList())
+                );
+            });
+        });
+
+        return "NewValue";
     }
 }

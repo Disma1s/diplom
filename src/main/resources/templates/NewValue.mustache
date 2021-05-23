@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <script>
+        let Ashan = {
+            flour: {{АшанМука}},
+            milk: {{АшанМолоко}},
+            sugar: {{АшанСахар}},
+            eggs: {{АшанЯйца}},
+            beef: {{АшанГовядина}},
+            sunflowerOil: {{АшанМасло растительное}}
+        }
+
+        let Perekrestok = {
+            flour: {{ПерекрестокМука}},
+            milk: {{ПерекрестокМолоко}},
+            sugar: {{ПерекрестокСахар}},
+            eggs: {{ПерекрестокЯйца}},
+            beef: {{ПерекрестокГовядина}},
+            sunflowerOil: {{ПерекрестокМасло растительное}}
+        }
+
+        let Pyterochka = {
+            flour: {{ПятёрочкаМука}},
+            milk: {{ПятёрочкаМолоко}},
+            sugar: {{ПятёрочкаСахар}},
+            eggs: {{ПятёрочкаЯйца}},
+            beef: {{ПятёрочкаГовядина}},
+            sunflowerOil: {{ПятёрочкаМасло растительное}}
+        }
+
+        let date = [
+            "декабрь 2016", "март 2017", "июнь 2017",
+            "сентябрь 2017","декабрь 2017", "март 2018",
+            "июнь 2018", "сентябрь 2018","декабрь 2018",
+            "март 2019", "июнь 2019", "сентябрь 2019",
+            "декабрь 2019", "март 2020", "июнь 2020",
+            "сентябрь 2020","декабрь 2020"]
+
+    </script>
+</head>
+<body>
+
+<div id="container"></div>
+<div id="container2"></div>
+<div id="container3"></div>
+<div id="container4"></div>
+<div id="container5"></div>
+<div id="container6"></div>
+<div id="container7"></div>
+<div id="container8"></div>
+<div id="container9"></div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Ашан'
+            },
+            subtitle: {
+                text: 'subtitle'
+            },
+
+            yAxis: {
+                title: {
+                    text: 'Цена'
+                }
+            },
+            xAxis: {
+                categories: date
+            },
+            legend: {
+                enabled: true
+            },
+            plotOptions: {
+                area: {
+                    // pointStart: 1850,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [
+                {
+                    name: 'Мука',
+                    data: Ashan.flour
+                },
+                {
+                    name: 'Молоко',
+                    data: Ashan.milk
+                },
+                {
+                    name: 'Сахар',
+                    data: Ashan.sugar
+                },
+                {
+                    name: 'Яйца',
+                    data: Ashan.eggs
+                },
+                {
+                    name: 'Говядина',
+                    data: Ashan.beef
+                },
+                {
+                    name: 'Масло растительное',
+                    data: Ashan.sunflowerOil
+                }
+            ]
+        });
+    });
+</script> <!--1-->
+<script type="text/javascript">
+    $(function () {
+        $('#container2').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Перекресток'
+            },
+            subtitle: {
+                text: 'subtitle'
+            },
+
+            yAxis: {
+                title: {
+                    text: 'Цена'
+                }
+            },
+            xAxis: {
+                categories: date
+            },
+            legend: {
+                enabled: true
+            },
+            plotOptions: {
+                area: {
+                    // pointStart: 1850,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [
+                {
+                    name: 'Мука',
+                    data: Perekrestok.flour
+                },
+                {
+                    name: 'Молоко',
+                    data: Perekrestok.milk
+                },
+                {
+                    name: 'Сахар',
+                    data: Perekrestok.sugar
+                },
+                {
+                    name: 'Яйца',
+                    data: Perekrestok.eggs
+                },
+                {
+                    name: 'Говядина',
+                    data: Perekrestok.beef
+                },
+                {
+                    name: 'Масло растительное',
+                    data: Perekrestok.sunflowerOil
+                }
+            ]
+        });
+    });
+</script> <!--2-->
+<script type="text/javascript">
+    $(function () {
+        $('#container3').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Пятёрочка'
+            },
+            subtitle: {
+                text: 'subtitle'
+            },
+
+            yAxis: {
+                title: {
+                    text: 'Цена'
+                }
+            },
+            xAxis: {
+                categories: date
+            },
+            legend: {
+                enabled: true
+            },
+            plotOptions: {
+                area: {
+                    // pointStart: 1850,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [
+                {
+                    name: 'Мука',
+                    data: Pyterochka.flour
+                },
+                {
+                    name: 'Молоко',
+                    data: Pyterochka.milk
+                },
+                {
+                    name: 'Сахар',
+                    data: Pyterochka.sugar
+                },
+                {
+                    name: 'Яйца',
+                    data: Pyterochka.eggs
+                },
+                {
+                    name: 'Говядина',
+                    data: Pyterochka.beef
+                },
+                {
+                    name: 'Масло растительное',
+                    data: Pyterochka.sunflowerOil
+                }
+            ]
+        });
+    });
+</script> <!--3-->
+
+<script type="text/javascript">
+    $(function () {
+        $('#container4').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Мука'
+            },
+            yAxis: {
+                title: {
+                    text: 'Цена'
+                }
+            },
+            xAxis: {
+                categories: date
+            },
+            legend: {
+                enabled: true
+            },
+            plotOptions: {
+                area: {
+                    // pointStart: 1850,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [
+                {
+                    name: 'Перекресток',
+                    data: Perekrestok.flour
+                },
+                {
+                    name: 'Ашан',
+                    data: Ashan.flour
+                },
+                {
+                    name: 'Пятёрочка',
+                    data: Pyterochka.flour
+                },
+            ]
+        });
+    });
+</script> <!--4-->
+
+<script type="text/javascript">
+    $(function () {
+        $('#container5').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Молоко'
+            },
+            yAxis: {
+                title: {
+                    text: 'Цена'
+                }
+            },
+            xAxis: {
+                categories: date
+            },
+            legend: {
+                enabled: true
+            },
+            plotOptions: {
+                area: {
+                    // pointStart: 1850,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [
+                {
+                    name: 'Перекресток',
+                    data: Perekrestok.milk
+                },
+                {
+                    name: 'Ашан',
+                    data: Ashan.milk
+                },
+                {
+                    name: 'Пятёрочка',
+                    data: Pyterochka.milk
+                },
+            ]
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#container6').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Сахар'
+            },
+            yAxis: {
+                title: {
+                    text: 'Цена'
+                }
+            },
+            xAxis: {
+                categories: date
+            },
+            legend: {
+                enabled: true
+            },
+            plotOptions: {
+                area: {
+                    // pointStart: 1850,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [
+                {
+                    name: 'Перекресток',
+                    data: Perekrestok.sugar
+                },
+                {
+                    name: 'Ашан',
+                    data: Ashan.sugar
+                },
+                {
+                    name: 'Пятёрочка',
+                    data: Pyterochka.sugar
+                },
+            ]
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#container7').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Яйца'
+            },
+            yAxis: {
+                title: {
+                    text: 'Цена'
+                }
+            },
+            xAxis: {
+                categories: date
+            },
+            legend: {
+                enabled: true
+            },
+            plotOptions: {
+                area: {
+                    // pointStart: 1850,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [
+                {
+                    name: 'Перекресток',
+                    data: Perekrestok.eggs
+                },
+                {
+                    name: 'Ашан',
+                    data: Ashan.eggs
+                },
+                {
+                    name: 'Пятёрочка',
+                    data: Pyterochka.eggs
+                },
+            ]
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#container8').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Говядина'
+            },
+            yAxis: {
+                title: {
+                    text: 'Цена'
+                }
+            },
+            xAxis: {
+                categories: date
+            },
+            legend: {
+                enabled: true
+            },
+            plotOptions: {
+                area: {
+                    // pointStart: 1850,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [
+                {
+                    name: 'Перекресток',
+                    data: Perekrestok.beef
+                },
+                {
+                    name: 'Ашан',
+                    data: Ashan.beef
+                },
+                {
+                    name: 'Пятёрочка',
+                    data: Pyterochka.beef
+                },
+            ]
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#container9').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Масло растительное'
+            },
+            yAxis: {
+                title: {
+                    text: 'Цена'
+                }
+            },
+            xAxis: {
+                categories: date
+            },
+            legend: {
+                enabled: true
+            },
+            plotOptions: {
+                area: {
+                    // pointStart: 1850,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [
+                {
+                    name: 'Перекресток',
+                    data: Perekrestok.sunflowerOil
+                },
+                {
+                    name: 'Ашан',
+                    data: Ashan.sunflowerOil
+                },
+                {
+                    name: 'Пятёрочка',
+                    data: Pyterochka.sunflowerOil
+                },
+            ]
+        });
+    });
+</script>
+</body>
+</html>

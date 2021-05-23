@@ -1,7 +1,8 @@
-package ru.dismals.diplom.model;
+package ru.dismals.diplom.model.old;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import ru.dismals.diplom.model.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -21,5 +22,4 @@ public class YearAndPrice extends BaseEntity {
     @JsonIgnore
     @ManyToOne(optional = false)
     private Product product;
-
 }

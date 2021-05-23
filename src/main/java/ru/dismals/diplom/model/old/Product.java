@@ -1,7 +1,8 @@
-package ru.dismals.diplom.model;
+package ru.dismals.diplom.model.old;
 
 
 import lombok.*;
+import ru.dismals.diplom.model.BaseEntity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -16,36 +17,15 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Product extends BaseEntity {
     private String nameProduct;
 
     @OneToMany(orphanRemoval = true, mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<YearAndPrice> yearList = new ArrayList<>();
-
-    public Product() {
-    }
-
-    public Product(Long id, String nameProduct, List<YearAndPrice> yearList) {
-        super(id);
-        this.nameProduct = nameProduct;
-        this.yearList = yearList;
-    }
-
-    public String getNameProduct() {
-        return nameProduct;
-    }
-
-    public void setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
-    }
-
-    public List<YearAndPrice> getYearList() {
-        return yearList;
-    }
-
-    public void setYearList(List<YearAndPrice> yearList) {
-        this.yearList = yearList;
-    }
 
     public void addYearAndPrice(YearAndPrice product) {
         yearList.add(product);

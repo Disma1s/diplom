@@ -4,8 +4,8 @@ import com.workday.insights.timeseries.arima.Arima;
 import com.workday.insights.timeseries.arima.struct.ArimaParams;
 import com.workday.insights.timeseries.arima.struct.ForecastResult;
 import org.springframework.stereotype.Service;
-import ru.dismals.diplom.model.Product;
-import ru.dismals.diplom.model.YearAndPrice;
+import ru.dismals.diplom.model.old.Product;
+import ru.dismals.diplom.model.old.YearAndPrice;
 import ru.dismals.diplom.repository.ProductRepo;
 
 import javax.annotation.PostConstruct;
@@ -20,19 +20,16 @@ import java.util.stream.DoubleStream;
 public class Forecasting {
 
     private final ProductRepo productRepo;
-    private final Parser parser;
     public Map<String, List<Integer>> forecastingResult = new HashMap<>();
 
-    public Forecasting(ProductRepo productRepo, Parser parser) {
+    public Forecasting(ProductRepo productRepo) {
         this.productRepo = productRepo;
-        this.parser = parser;
     }
 
     @PostConstruct
     public void start() {
-        parser.init();
         int p = 20;
-        int d = 1;
+        int d = 0;
         int q = 1;
         int P = 0;
         int D = 0;
@@ -57,9 +54,11 @@ public class Forecasting {
 
             forecastingResult.put(
                     product.getNameProduct(),
-                    Arrays.stream(ints).boxed().collect(Collectors.toList())
+                    Arrays.stream(ints)
+                            .boxed()
+                            .collect(Collectors.toList())
             );
-            print(forecastResult.getForecast(),product.getNameProduct());
+            print(forecastResult.getForecast(), product.getNameProduct());
         }
     }
 
